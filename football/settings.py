@@ -100,7 +100,8 @@ INSTALLED_APPS = (
 
 LOCAL_APPS = (
     'main',
-    'user_profile'
+    'user_profile',
+    'news',
 )
 
 # A sample logging configuration. The only tangible logging
