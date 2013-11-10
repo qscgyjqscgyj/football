@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="_title">Авторизация</h4>
+
+{% if user.is_authenticated %}
+    Что такое, {{ user.username }}? Вы же уже авторизорваны.
+    Впрочем, всегда можно <a href="{% url 'auth_logout' %}">выйти</a>.<br/><br/>
+{% else %}
+
+{% if form.non_field_errors %}
+    {{ form.non_field_errors }}
+{% endif %}
+
+<form method="post" class="_login-form form-horizontal">{% csrf_token %}
+    <table class="_ad-table">
+        <tr>
+            <td class="span2">{{ form.username.label }}</td>
+            <td class="span4">{{ form.username.errors }}{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label }}</td>
+            <td>{{ form.password.errors }}{{ form.password }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><label class="checkbox _login-form-remember-label"><input class="_login-form-remember-input" type="checkbox" />Запомнить меня</label></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Войти" class="btn btn-small _login-form-button"></td>
+        </tr>
+    </table>
+</form>
+
+<ul class="_login-list">
+    <li><a href="{% url 'auth_password_reset' %}">Забыли пароль?</a></li>
+    <li><a href="/accounts/register/">Регистрация</a></li>
+</ul>
+{% endif %}
+{% endblock %}

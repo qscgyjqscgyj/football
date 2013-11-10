@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+{% load flatblock_tags %}
+<h4 class="_title">Регистрация</h4>
+{% flatblock 'Регистрация' %}
+<form method="post" class="_login-form form-horizontal">{% csrf_token %}
+    <table class="_ad-table">
+        <tr>
+            <td class="span2">{{ form.username.label }}</td>
+            <td class="span4">{{ form.username.errors }}{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.email.label }}</td>
+            <td>{{ form.email.errors }}{{ form.email }}</td>
+        </tr>
+                <tr>
+            <td>{{ form.password1.label }}</td>
+            <td>{{ form.password1.errors }}{{ form.password1 }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password2.label }}</td>
+            <td>{{ form.password2.errors }}{{ form.password2 }}</td>
+        </tr>
+        <tr>
+            <td class="captcha-label">Код с картинки</td>
+            <td class="captcha-label">{{ form.captcha.errors }}{{ form.captcha }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Зарегестрироваться" class="btn btn-small _reg-form-button"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

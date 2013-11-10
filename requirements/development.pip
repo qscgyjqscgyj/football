@@ -1,0 +1,9 @@
+django-extensions
+ipdb
+ipython
+jedi
+flake8
+pep8
+pyflakes
+pygraphviz
+pylint

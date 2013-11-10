@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <form method="post">{% csrf_token %}
+    <h2>Статист:</h2>
+        {% for field in form %}
+            <dt>{{ field.label }}:</dt>
+            <dd class="clearfix">
+                {{ field }}
+                {{ field.errors }}
+            </dd>
+        {% endfor %}
+        <input type="submit" value="Сохранить данные" class="clearfix">
+    </form>
+{% endblock %}
