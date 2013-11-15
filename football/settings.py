@@ -21,11 +21,11 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'football',
-        'USER': 'root',
-        'PASSWORD': 'balabas',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '',
     }
 }
@@ -139,4 +139,4 @@ for item in LOCAL_APPS:
     TEMPLATE_DIRS+=(join(PROJECT_PATH, item,'templates'),)
     STATICFILES_DIRS+=((item,join(PROJECT_PATH, item,'static')),)
 
-# from local import *
+from local import *
