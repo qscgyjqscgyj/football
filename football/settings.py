@@ -102,6 +102,7 @@ LOCAL_APPS = (
     'main',
     'user_profile',
     'news',
+    'slider',
 )
 
 # A sample logging configuration. The only tangible logging
