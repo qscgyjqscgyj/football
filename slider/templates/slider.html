@@ -1,0 +1,19 @@
+{% load thumbnail %}
+
+<div class="slides_container">
+    {% for slide in slides %}
+        <div class="element">
+            <div class="image">
+                {% thumbnail slide.img "230x230" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                {% endthumbnail %}
+            </div>
+            <div class="text">
+                <h2><a href="{{ slide.url }}">{{ slide.title }}</a></h2>
+                <p>
+                    {{ slide.text }}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
