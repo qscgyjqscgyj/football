@@ -65,3 +65,17 @@ ul.nav.my_nav {
 .forward a {
     color: #fff;
 }
+
+/* new style football */
+._news_all_element {
+    padding: 10px 0;
+    margin: 10px 0;
+}
+
+a._news_all_link {
+    float: right;
+    padding: 10px;
+    background: #333333;
+    color: #eeeeee;
+}
+

@@ -3,14 +3,19 @@
 {% load flatblock_tags %}
 
 {% block content %}
-    <div class="row _new">
-        <div class="span12">
+    <div class="span12">
+    <div class="row">
+        <div class="span9 _new">
+            <h3>{{ new.name }}</h3>
             {% thumbnail new.image "350x250" crop="center" as im %}
                 <img class="_new_img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Иллюстрация" align="left" vspace="5" hspace="5">
             {% endthumbnail %}
-            <h3>{{ new.name }}</h3>
             <p class="_new_date">{{ new.date }}</p>
             {% autoescape off %}<p>{{ new.text }}</p>{% endautoescape %}
         </div>
+        <div class="span3 _sidebar">
+            {% flatblock "block_menu" %}
+        </div>
+    </div>
     </div>
 {% endblock %}
