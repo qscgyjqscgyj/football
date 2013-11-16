@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'redactor',
     'flatblocks',
+    'bootstrap_toolkit',
 
 )
 

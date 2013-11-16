@@ -47,11 +47,6 @@ ul.nav.my_nav {
     padding:0 5px;
 }
 
-.footer {
-    background: url("../img/blue_header.jpg") center no-repeat;
-    height: 62px;
-}
-
 .rights {
     color: #fff;
     padding-top:20px;
@@ -79,3 +74,36 @@ a._news_all_link {
     color: #eeeeee;
 }
 
+.footer {
+    background: url("../img/blue_header.jpg") center no-repeat;
+    height: 42px;
+    padding-top: 25px;
+}
+
+.footer p, .footer a {
+    color: #fff;
+}
+
+.header {
+    margin-top: 20px;
+}
+
+.block_about {
+    margin-top: 60px;
+}
+
+p.register_button {
+    text-align: right;
+}
+
+a.my_btn {
+    background: url("../img/button.jpg") no-repeat;
+    padding: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    border: 1px solid #767676;
+}
+
+a.my_btn:hover {
+    color: #dbdbdb;
+}
