@@ -26,15 +26,15 @@ class SportType(models.Model):
 
 
 class Game(models.Model):
-    team1 = models.CharField(verbose_name=_(u'Название первой команды'), max_length=100)
-    team2 = models.CharField(verbose_name=_(u'Название второй команды'), max_length=100)
-    score = models.CharField(verbose_name=_(u'Счет игры'), max_length=100, blank=True, null=True)
-    draw = models.BooleanField(verbose_name=_(u'Ничья'))
-    win_team = models.ForeignKey(Team, verbose_name=_(u'Победившая команда'), related_name='game_team',
-                                 blank=True, null=True)
     sport = models.ForeignKey(SportType, verbose_name=_(u'Вид спорта'), related_name='game_sport_type',
                               blank=True, null=True)
+    team1 = models.CharField(verbose_name=_(u'Название первой команды'), max_length=100)
+    team2 = models.CharField(verbose_name=_(u'Название второй команды'), max_length=100)
     date = models.DateTimeField(verbose_name=_(u'Начало игры'))
+    win_team = models.ForeignKey(Team, verbose_name=_(u'Победившая команда'), related_name='game_team',
+                                 blank=True, null=True)
+    score = models.CharField(verbose_name=_(u'Счет игры'), max_length=100, blank=True, null=True)
+    draw = models.BooleanField(verbose_name=_(u'Ничья'))
 
     def __unicode__(self):
         return (unicode(self.sport) + " " + self.team1 +
