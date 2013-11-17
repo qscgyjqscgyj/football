@@ -30,13 +30,15 @@ class Game(models.Model):
     team2 = models.CharField(verbose_name=_(u'Название второй команды'), max_length=100)
     score = models.CharField(verbose_name=_(u'Счет игры'), max_length=100, blank=True, null=True)
     draw = models.BooleanField(verbose_name=_(u'Ничья'))
-    win_team = models.ForeignKey(Team, verbose_name=_(u'Победившая команда'), related_name='game_team')
-    sport = models.ForeignKey(SportType, verbose_name=_(u'Вид спорта'), related_name='game_sport_type')
+    win_team = models.ForeignKey(Team, verbose_name=_(u'Победившая команда'), related_name='game_team',
+                                 blank=True, null=True)
+    sport = models.ForeignKey(SportType, verbose_name=_(u'Вид спорта'), related_name='game_sport_type',
+                              blank=True, null=True)
     date = models.DateTimeField(verbose_name=_(u'Начало игры'))
 
     def __unicode__(self):
-        return (str(self.sport) + str(self.team1) +
-                u" - " + str(self.team2) + str(self.date))
+        return (unicode(self.sport) + " " + self.team1 +
+                " vs " + self.team2 + " " + str(self.date))
 
     class Meta:
         verbose_name = _(u'Игра')

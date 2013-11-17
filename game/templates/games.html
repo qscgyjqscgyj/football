@@ -2,6 +2,40 @@
 {% load thumbnail %}
 {% load flatblock_tags %}
 
+{% block calendar_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            $('#calendar').fullCalendar({
+                editable: false,
+                firstDay: 1,
+                monthNames: ['Январь','Февраль','Март','Апрель','Май','οюнь','οюль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+                monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','οюнь','οюль','Авг.','Сент.','Окт.','Ноя.','Дек.'],
+                dayNames: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
+                dayNamesShort: ["ВС","ПН","ВТ","СР","ЧТ","ПТ","СБ"],
+                buttonText: {
+                    prev: "&nbsp;&#9668;&nbsp;",
+                    next: "&nbsp;&#9658;&nbsp;",
+                    prevYear: "&nbsp;&lt;&lt;&nbsp;",
+                    nextYear: "&nbsp;&gt;&gt;&nbsp;",
+                    today: "Сегодня",
+                    month: "Месяц",
+                    week: "Неделя",
+                    day: "День"
+                },
+                events: {{ games|safe }}
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
 {% block content %}
-    GAMES
 {% endblock %}
