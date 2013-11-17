@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from game.models import *
 import datetime
 
+
 class GameListView(ListView):
     template_name = 'games.html'
     model = Game

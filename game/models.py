@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from user_profile.models import Supernumerary
 
 
 class Team(models.Model):
@@ -43,3 +44,20 @@ class Game(models.Model):
     class Meta:
         verbose_name = _(u'Игра')
         verbose_name_plural = _(u'Игры')
+
+
+class Forecast(models.Model):
+    supernumerary = models.ForeignKey(Supernumerary, verbose_name=_(u'Статист'),
+                                      related_name='forecast_supernumerary')
+    game = models.ForeignKey(Game, verbose_name=_(u'Игра'), related_name='forecast_game')
+    score = models.CharField(verbose_name=_(u'Счет'), max_length=100, blank=True, null=True)
+    draw = models.BooleanField(verbose_name=_(u'Ничья'))
+    win_team = models.ForeignKey(Team, verbose_name=_(u'Победившая команда'), related_name='forecast_team',
+                                 blank=True, null=True)
+
+    def __unicode__(self):
+        return self.game.__unicode__()
+
+    class Meta:
+        verbose_name = _(u'Прогноз')
+        verbose_name_plural = _(u'Прогнозы')
