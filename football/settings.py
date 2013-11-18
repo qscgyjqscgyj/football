@@ -95,7 +95,8 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'redactor',
     'flatblocks',
-    'bootstrap_toolkit',
+    'bootstrap',
+    'bootstrap_toolkit'
 
 )
 
@@ -104,6 +105,7 @@ LOCAL_APPS = (
     'user_profile',
     'news',
     'slider',
+    'game',
 )
 
 # A sample logging configuration. The only tangible logging
