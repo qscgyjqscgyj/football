@@ -86,6 +86,22 @@ class CustomUserRegistrationView(CustomRegistrationView):
         return user
 
 
+class SupernumeraryRegistrationView(CustomRegistrationView):
+
+    @classmethod
+    def create_user(cls, username, email, password=None, **extra_fields):
+        now = timezone.now()
+        if not username:
+            raise ValueError('The given username must be set')
+        email = UserManager.normalize_email(email)
+        user = CustomUser(username=username, email=email, is_staff=False, is_active=True, is_superuser=False,
+                          last_login=now, date_joined=now, **extra_fields)
+
+        user.set_password(password)
+        user.save()
+        return user
+
+
 class CustomProfileView(UpdateView):
     model = User
     context_object_name = 'profile'
