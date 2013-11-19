@@ -92,18 +92,155 @@ a._news_all_link {
     margin-top: 60px;
 }
 
-p.register_button {
-    text-align: right;
-}
-
 a.my_btn {
-    background: url("../img/button.jpg") no-repeat;
-    padding: 10px;
-    color: #fff;
+    background: url("../img/button_big.jpg") no-repeat;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    padding:20px 10px;
+    color: #F1F1F1;
     text-transform: uppercase;
     border: 1px solid #767676;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    font-size: 14px;
 }
 
 a.my_btn:hover {
-    color: #dbdbdb;
+    background: url("../img/button_big.jpg") no-repeat;
+    -moz-background-size: 160%; /* Firefox 3.6+ */
+    -webkit-background-size: 160%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 160%; /* Opera 9.6+ */
+    background-size: 160%; /* Современные браузеры */
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #9F9F9F;
+}
+
+#calendar {
+    margin-bottom: 20px;
+}
+
+#slogan {
+    background: #E7E7E7;
+    padding: 12px 0;
+    border-bottom: 1px solid #D7D7D7;
+    border-top: 1px solid #D7D7D7;
+}
+
+.register_button {
+    margin-top: 7px!important;
+}
+
+.slogan_text p {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #606060;
+    text-align: right;
+    margin-top: 10px;
+    float: left;
+    margin-left: 10px;
+}
+
+.login {
+    text-align: right;
+}
+
+.baner img {
+    border-bottom: 1px solid #B6B6B6;
+    border-right: 1px solid #B6B6B6;
+    border-left: 1px solid #B6B6B6;
+}
+
+.slogan_img img {
+    position: absolute;
+    margin-top: -34px;
+    width: 270px;
+    border-top: 1px solid #B6B6B6;
+    border-right: 1px solid #B6B6B6;
+    border-left: 1px solid #B6B6B6;
+}
+
+.slogan_inner {
+    float: right;
+}
+
+.games_list {
+    /*background: #F5F4F4;*/
+}
+
+.game_in_list {
+    border-top: 1px solid #b3b3b3;
+    padding:10px 10px 0px 10px;
+    float: left;
+    width: 100%;
+}
+
+.game_in_list.first {
+    border: none;
+    padding-bottom: 1px;
+}
+
+.game_left {
+    float: left;
+    width: 68%;
+}
+
+.game_right {
+    float: left;
+    width: 32%;
+}
+
+.game_right a {
+    /*background: url("../img/button_big.jpg") -50px no-repeat;*/
+    background: url("../img/right_arrow.png") 90px no-repeat;
+    -moz-background-size: 30%;
+    -webkit-background-size: 30%;
+    -o-background-size: 30%;
+    background-size: 30%;
+    padding:10px 50px 10px 0;
+    color: #000;
+    text-transform: uppercase;
+    /*border: 1px solid #767676;*/
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    /*font-size: 14px;*/
+    line-height: 60px;
+}
+
+.game_right a:hover {
+    background: url("../img/right_arrow.png") 100px no-repeat;
+    -moz-background-size: 30%;
+    -webkit-background-size: 30%;
+    -o-background-size: 30%;
+    background-size: 30%;
+    /*background: url("../img/button_big.jpg") no-repeat;*/
+    /*-moz-background-size: 220%; *//* Firefox 3.6+ */
+    /*-webkit-background-size: 220%; *//* Safari 3.1+ и Chrome 4.0+ */
+    /*-o-background-size: 220%; *//* Opera 9.6+ */
+    /*background-size: 260%; *//* Современные браузеры */
+    text-decoration: none;
+    color: #000;
+    /*border: 1px solid #9F9F9F;*/
+}
+
+.sport_name {
+    color: green;
+    text-transform: uppercase;
+}
+
+.sport_date {
+    font-style: italic;
+    font-size: 12px;
+}
+
+.sport_command {
+    margin-top: 20px;
 }

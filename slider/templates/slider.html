@@ -11,7 +11,7 @@
     <div class="carousel-inner">
         {% for slide in slides %}
             <div class="item {% if slide == slides|first %}active{% endif %}">
-                {% thumbnail slide.img "490x300" crop="center" as im %}
+                {% thumbnail slide.img "670x300" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                 {% endthumbnail %}
                 <div class="container">
