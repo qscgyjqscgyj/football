@@ -2,23 +2,27 @@
 {% load bootstrap_toolkit %}
 {% load flatblock_tags %}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="utf-8">
         <title>Спортивные ставки</title>
         <link href="{% static 'theme/css/global.css' %}" rel="stylesheet">
         <link href="{% static 'libraries/calendar/fullcalendar.css' %}" rel="stylesheet">
-        {% bootstrap_stylesheet_tag %}
-        {% bootstrap_stylesheet_tag "responsive" %}
+        <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static 'bootstrap/css/bootstrap-responsive.css' %}" rel="stylesheet">
+{#        {% bootstrap_stylesheet_tag %}#}
+{#        {% bootstrap_stylesheet_tag "responsive" %}#}
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script type="text/javascript" src="{% static 'libraries/jquery-2.0.3.min.js' %}"></script>
-        {% bootstrap_javascript_tag %}
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'bootstrap/js/cariusel.js' %}" type="text/javascript"></script>
+{#        {% bootstrap_javascript_tag %}#}
         <script type="text/javascript" src="{% static 'libraries/calendar/jquery-ui.custom.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libraries/calendar/fullcalendar.js' %}"></script>
         {% block calendar_js %}
-        {% endblock %}я
+        {% endblock %}
     </head>
     <body>
 
@@ -43,17 +47,52 @@
                     <div class="span12">
                         <div class="row">
                             <div class="span7">
-                                <div class="block_about">
-                                    {% flatblock "block_main_top" %}
-                                    <p class="register_button">
-                                        <a href="" class="my_btn">Зарегистрироваться</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="span5">
                                 {% block slider %}
                                     {% include 'slider.html' %}
                                 {% endblock %}
+                            </div>
+                            <div class="span5">
+                                <div class="block_about">
+                                    {% flatblock "block_main_top" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block slogan %}
+            <div id="slogan">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span3 slogan_img">
+{#                                    <img src="{% static 'theme/img/baner_new1.jpg' %}" alt=""/>#}
+                                    <!--социальные кнопки-->
+                                    <div class="share">
+                                        <script type="text/javascript">(function() {
+                                          if (window.pluso)if (typeof window.pluso.start == "function") return;
+                                          if (window.ifpluso==undefined) { window.ifpluso = 1;
+                                            var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+                                            s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+                                            s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+                                            var h=d[g]('body')[0];
+                                            h.appendChild(s);
+                                          }})();</script>
+                                        <div class="pluso" data-background="transparent" data-options="medium,round,line,horizontal,counter,theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,pinterest,google"></div>
+                                    </div>
+                                    <!--конец социальным кнопкам-->
+                                </div>
+                                <div class="span9 slogan_text">
+                                    <div class="slogan_inner">
+                                        <p>Ставьте на верный результат</p>
+                                        <p class="register_button">
+                                            <a href="" class="my_btn">Зарегистрироваться</a>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,19 +104,46 @@
         <div class="middle_content">
             <div class="container">
                 <div class="row">
+                    <div class="span12 login">
+{#                        {% block auth %}#}
+{#                            {% if user.is_authenticated %}#}
+{#                                <a href="/accounts/logout/">LogOut</a>#}
+{#                            {% else %}#}
+{#                                <a href="/accounts/login/">LogIn</a>#}
+{#                                <a href="/accounts/register/">Reg.</a>#}
+{#                            {% endif %}#}
+{#                        {% endblock %}#}
+                    </div>
                     <div class="span12">
                         {% block content %}
-                            {% if user.is_authenticated %}
-                                <a href="/accounts/logout/">LogOut</a>
-                            {% else %}
-                                <a href="/accounts/login/">LogIn</a>
-                                <a href="/accounts/register/">Reg.</a>
-                            {% endif %}
+                            <div class="row">
+                                <div class="span4">
+
+                                </div>
+                                <div class="span5">
+                                    <div class="games_list">
+                                        {% for game in games %}
+                                            <div class="game_in_list{% if game == games|first %} first{% endif %}">
+                                                <div class="game_left">
+                                                    <span class="sport_name">{{game.sport}}</span>
+                                                    <div class="sport_command">{{  game.team1 }} - {{ game.team2 }}</div>
+                                                </div>
+                                                <div class="game_right">
+                                                    <span class="sport_date">{{ game.date }}</span>
+                                                    <a href="/game/{{ game.pk }}">подробнее</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="span3 baner">
+                                    <img src="{% static 'theme/img/baner.jpg' %}" alt=""/>
+                                </div>
+                            </div>
                         {% endblock %}
                     </div>
                     <div class="span12">
                         {% block calendar %}
-                            <div id='calendar'></div>
                         {% endblock %}
                     </div>
                 </div>
