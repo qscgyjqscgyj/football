@@ -1,3 +1,16 @@
+@font-face {
+	font-family:"eurofurence light";
+	src:url("../eurofurence_light_regular.ttf") format("truetype");
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face {
+	font-family:"eurofurence regular";
+	src:url("../eurofurence_regular.ttf") format("truetype");
+	font-weight:normal;
+	font-style:normal;
+}
+
 body {
     background-image:url(../img/body_bg.gif);
     background-color:#f4f4f4;
@@ -11,6 +24,13 @@ body {
 
 .my_brand a {
     color: #fff;
+    font-family: 'eurofurence light';
+    font-size: 30px;
+}
+
+.my_brand a:hover {
+    color: #b3b3b3;
+    text-decoration: none;
 }
 
 .my_navbar_inner ul.my_nav li a {
@@ -23,6 +43,7 @@ body {
 
 ul.nav.my_nav {
     float: right;
+    margin-top: 13px;
 }
 
 .page-header.my_header {
@@ -52,13 +73,15 @@ ul.nav.my_nav {
     padding-top:20px;
 }
 
-.forward {
-    text-align: right;
-    padding-top:20px;
-}
-
 .forward a {
     color: #fff;
+    font-family: 'eurofurence light';
+    font-size: 20px;
+}
+
+.forward a:hover {
+    color: #b3b3b3;
+    text-decoration: none;
 }
 
 /* new style football */
@@ -72,6 +95,13 @@ a._news_all_link {
     padding: 10px;
     background: #333333;
     color: #eeeeee;
+    font-family: 'eurofurence light';
+    font-size: 20px;
+}
+
+a._news_all_link:hover {
+    color: #b3b3b3;
+    text-decoration: none;
 }
 
 .footer {
@@ -98,7 +128,7 @@ a.my_btn {
     -webkit-background-size: 100%;
     -o-background-size: 100%;
     background-size: 100%;
-    padding:20px 10px;
+    padding:12px 10px;
     color: #F1F1F1;
     text-transform: uppercase;
     border: 1px solid #767676;
@@ -108,6 +138,8 @@ a.my_btn {
     -o-transition: all .4s ease;
     transition: all .4s ease;
     font-size: 14px;
+    font-family: 'eurofurence light';
+    font-size: 20px;
 }
 
 a.my_btn:hover {
@@ -177,7 +209,7 @@ a.my_btn:hover {
     border-top: 1px solid #b3b3b3;
     padding:10px 10px 0px 10px;
     float: left;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .game_in_list.first {
@@ -187,12 +219,12 @@ a.my_btn:hover {
 
 .game_left {
     float: left;
-    width: 68%;
+    width: 60%;
 }
 
 .game_right {
     float: left;
-    width: 32%;
+    width: 40%;
 }
 
 .game_right a {
@@ -243,4 +275,53 @@ a.my_btn:hover {
 
 .sport_command {
     margin-top: 20px;
+    margin-right: 5px;
+}
+
+.menu_right {
+    background: url("../img/menu_bg.jpg") no-repeat;
+    padding: 180px 0 20px 20px;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    height: 264px;
+}
+
+.menu_right a {
+    color: #fff;
+    font-family: 'eurofurence light';
+    font-size: 25px;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.menu_right a:hover {
+    color: #e8e8e8;
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+.menu_right h3 {
+    color: #fff;
+    font-size: 30px;
+    font-family: 'eurofurence light';
+}
+
+.menu_right ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #CFCFCF;
+    margin-right: 50px;
+}
+
+.menu_right ul {
+    margin-left: 0px;
+}
+
+a._news_all_name h3{
+    font-family: 'eurofurence light';
 }

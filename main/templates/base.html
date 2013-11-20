@@ -105,14 +105,14 @@
             <div class="container">
                 <div class="row">
                     <div class="span12 login">
-{#                        {% block auth %}#}
-{#                            {% if user.is_authenticated %}#}
-{#                                <a href="/accounts/logout/">LogOut</a>#}
-{#                            {% else %}#}
-{#                                <a href="/accounts/login/">LogIn</a>#}
-{#                                <a href="/accounts/register/">Reg.</a>#}
-{#                            {% endif %}#}
-{#                        {% endblock %}#}
+                        {% block auth %}
+                            {% if user.is_authenticated %}
+                                <a href="/accounts/logout/">LogOut</a>
+                            {% else %}
+                                <a href="/accounts/login/">LogIn</a>
+                                <a href="/accounts/register/">Reg.</a>
+                            {% endif %}
+                        {% endblock %}
                     </div>
                     <div class="span12">
                         {% block content %}
@@ -137,7 +137,9 @@
                                     </div>
                                 </div>
                                 <div class="span3 baner">
-                                    <img src="{% static 'theme/img/baner.jpg' %}" alt=""/>
+                                    <div class="menu_right">
+                                        {% flatblock 'block_menu' %}
+                                    </div>
                                 </div>
                             </div>
                         {% endblock %}
@@ -159,7 +161,7 @@
                             <div class="span9">
                                 <p>Все права защищены @2013</p>
                             </div>
-                            <div class="span3">
+                            <div class="span3 forward">
                                 <a href="http://forward70.ru"> Создание сайтов Forward</a>
                             </div>
                         </div>

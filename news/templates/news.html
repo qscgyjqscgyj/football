@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 {% load flatblock_tags %}
+{% load staticfiles %}
 
 {% block header %}
 {% endblock %}
 
 {% block content %}
-    <div class="span12">
-        <div class="row">
+    <div class="row">
         <div class="span9 _news_all">
         {% for new in news %}
             <div class="row _news_all_element">
@@ -16,15 +16,15 @@
                 {% thumbnail new.image "250x150" crop="center" as im %}
                     <img class="_category-img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Иллюстрация" align="left" vspace="5" hspace="5">
                 {% endthumbnail %}
-{#                <p class="_news_all_subtext">{{ new.subtext }}</p>#}
                 <p class="news_all_body">{{ new.text|removetags:"img"|truncatewords:"100"|safe }}</p>
                 <a class="_news_all_link" href="/new/{{ new.pk }}">Подробнее</a>
             </div>
         {% endfor %}
         </div>
-        <div class="span3 _sidebar">
-            {% flatblock "block_menu" %}
-        </div>
+        <div class="span3 baner">
+            <div class="menu_right">
+                {% flatblock 'block_menu' %}
+            </div>
         </div>
     </div>
 {% endblock %}

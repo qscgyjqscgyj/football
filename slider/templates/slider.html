@@ -17,7 +17,7 @@
                 <div class="container">
                     <div class="carousel-caption">
                         <h4><a href="{{ slide.url }}">{{ slide.title }}</a></h4>
-                        <p>{{ slide.text }}</p>
+                        <p>{{ slide.text|removetags:"img"|truncatewords:"25"|safe }}</p>
                     </div>
                 </div>
             </div>
