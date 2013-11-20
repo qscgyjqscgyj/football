@@ -18,7 +18,7 @@
         <script type="text/javascript" src="{% static 'libraries/calendar/jquery-ui.custom.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libraries/calendar/fullcalendar.js' %}"></script>
         {% block calendar_js %}
-        {% endblock %}я
+        {% endblock %}
     </head>
     <body>
 
@@ -73,6 +73,15 @@
                                 <a href="/accounts/login/">LogIn</a>
                                 <a href="/accounts/register/">Reg.</a>
                             {% endif %}
+                            {% for supernumerary in supernumeraries %}
+                                <p>имя пользователя: {{ supernumerary.username }}</p>
+                                <p>фио: {{ supernumerary.fio }}</p>
+                                <p>фото: {{ supernumerary.photo }}</p>
+                                <p>верные прогнозы: {{ supernumerary.right }}</p>
+                                <p>не верные прогнозы: {{ supernumerary.wrong }}</p>
+                                <p>о статисте: {{ supernumerary.about }}</p>
+                                <hr>
+                            {% endfor %}
                         {% endblock %}
                     </div>
                     <div class="span12">
