@@ -45,7 +45,6 @@ class NewForecastView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(NewForecastView, self).get_context_data(**kwargs)
-        context['forecasts'] = Forecast.objects.all()
         user = self.request.user
         try:
             custom_user = CustomUser.objects.get(pk=user.pk).pk
