@@ -67,6 +67,10 @@ class Game(models.Model):
                     supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
                     supernumerary.wrong = F('wrong') + 1
                     supernumerary.save()
+                elif not forecast.score and not forecast.draw and not forecast.win_team:
+                    supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
+                    supernumerary.wrong = F('wrong') + 1
+                    supernumerary.save()
                 elif forecast.score and forecast.draw:
                     supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
                     supernumerary.wrong = F('wrong') + 1
