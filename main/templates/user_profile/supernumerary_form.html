@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form method="post">{% csrf_token %}
+    <form enctype="multipart/form-data" method="post">{% csrf_token %}
     <h2>Статист:</h2>
         {% for field in form %}
             <dt>{{ field.label }}:</dt>
