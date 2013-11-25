@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load bootstrap_toolkit %}
 {% load flatblock_tags %}
+{% load thumbnail %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,8 +53,23 @@
                                 {% endblock %}
                             </div>
                             <div class="span5">
-                                <div class="block_about">
-                                    {% flatblock "block_main_top" %}
+                                <div class="row">
+                                    <div class="span5 auth">
+                                        {% block auth %}
+                                            {% if user.is_authenticated %}
+                                                <a href="/accounts/profile/">Личный кабинет</a>
+                                                <a href="/accounts/logout/">Выйти</a>
+                                            {% else %}
+                                                <a href="/accounts/login/">Войти</a>
+                                                <a href="/accounts/register/">Зарегистрироваться</a>
+                                            {% endif %}
+                                        {% endblock %}
+                                    </div>
+                                    <div class="span5">
+                                        <div class="block_about">
+                                            {% flatblock "block_main_top" %}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +120,7 @@
         <div class="middle_content">
             <div class="container">
                 <div class="row">
-                    <div class="span12 login">
+{#                    <div class="span12 login">#}
 {#                        {% block auth %}#}
 {#                            {% if user.is_authenticated %}#}
 {#                                <a href="/accounts/logout/">LogOut</a>#}
@@ -117,9 +133,6 @@
                     <div class="span12">
                         {% block content %}
                             <div class="row">
-                                <div class="span4">
-
-                                </div>
                                 <div class="span5">
                                     <div class="games_list">
                                         {% for game in games %}
@@ -136,27 +149,32 @@
                                         {% endfor %}
                                     </div>
                                 </div>
+                                <div class="span4 statist_main">
+                                    {% for supernumerary in supernumeraries %}
+                                        <div class="statist_top">
+                                            <span class="statist_name">{{ supernumerary.fio }}</span>
+                                            <span class="statist_nickname">{{ supernumerary.username }}</span>
+                                        </div>
+                                        <div class="statist_middle">
+                                            {% thumbnail supernumerary.photo "150x150" crop="center" as im %}
+                                                <img class="_category-img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Иллюстрация" align="left" vspace="5" hspace="5">
+                                            {% endthumbnail %}
+                                            <p>{{ supernumerary.about|removetags:"img"|truncatewords:"25"|safe }}</p>
+                                        </div>
+                                        <div class="statist_bottom">
+                                            <span>Краткая статистика:</span>
+                                            <span class="statist_right">{{ supernumerary.right }}</span>
+                                            <span class="statist_wrong">{{ supernumerary.wrong }}</span>
+                                        </div>
+                                        <hr>
+                                    {% endfor %}
+                                </div>
                                 <div class="span3 baner">
-                                    <img src="{% static 'theme/img/baner.jpg' %}" alt=""/>
+                                    <div class="menu_right">
+                                        {% flatblock 'block_menu' %}
+                                    </div>
                                 </div>
                             </div>
-
-                            {% if user.is_authenticated %}
-                                <a href="/accounts/logout/">LogOut</a>
-                            {% else %}
-                                <a href="/accounts/login/">LogIn</a>
-                                <a href="/accounts/register/">Reg.</a>
-                            {% endif %}
-                            {% for supernumerary in supernumeraries %}
-                                <p>имя пользователя: {{ supernumerary.username }}</p>
-                                <p>фио: {{ supernumerary.fio }}</p>
-                                <p>фото: {{ supernumerary.photo }}</p>
-                                <p>верные прогнозы: {{ supernumerary.right }}</p>
-                                <p>не верные прогнозы: {{ supernumerary.wrong }}</p>
-                                <p>о статисте: {{ supernumerary.about }}</p>
-                                <hr>
-                            {% endfor %}
-
                         {% endblock %}
                     </div>
                     <div class="span12">
@@ -176,7 +194,7 @@
                             <div class="span9">
                                 <p>Все права защищены @2013</p>
                             </div>
-                            <div class="span3">
+                            <div class="span3 forward">
                                 <a href="http://forward70.ru"> Создание сайтов Forward</a>
                             </div>
                         </div>
