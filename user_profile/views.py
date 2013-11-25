@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import UpdateView
 from registration import signals
 from registration.models import RegistrationProfile
+from game.models import Forecast
 from user_profile.forms import *
 from user_profile.models import *
 from registration.backends.default.views import RegistrationView
@@ -116,6 +117,11 @@ class CustomProfileView(UpdateView):
             obj = self.request.user.customuser
             self.form_class = CustomUserProfileForm
             return obj
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomProfileView, self).get_context_data(**kwargs)
+        context['forecasts'] = Forecast.objects.filter(supernumerary=self.request.user)
+        return context
 
 
 def my_change_password(request):

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load flatblock_tags %}
+
+{% block calendar_js %}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    {% if custom_user %}
+        Вы не можете делать прогнозы, так как вы не являетесь "Статистом".
+    {% else %}
+    <form method="post">{% csrf_token %}
+        {% for field in form %}
+            <p>{{ field.label }}: {{ field }}</p>
+        {% endfor %}
+        <input type="submit" value="Save">
+    </form>
+    {% for forecast in forecasts %}
+        <p>{{ forecast }}, {{ forecast.supernumerary }}</p>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

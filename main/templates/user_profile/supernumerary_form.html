@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block content %}
-
-    <form method="post">{% csrf_token %}
+    <a href="/forecast/new">New Forecast</a>
+    <form enctype="multipart/form-data" method="post">{% csrf_token %}
     <h2>Статист:</h2>
         {% for field in form %}
             <dt>{{ field.label }}:</dt>
@@ -16,4 +16,7 @@
         {% endfor %}
         <input type="submit" value="Сохранить данные" class="clearfix">
     </form>
+    {% for forecast in forecasts %}
+        <p>{{ forecast }}, {{ forecast.supernumerary }}</p>
+    {% endfor %}
 {% endblock %}

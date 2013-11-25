@@ -8,6 +8,6 @@ class CustomAdmin(UserAdmin):
     list_display = ('username', 'email', 'is_staff', 'is_active', 'fio', 'photo',)
     list_filter = ('is_staff', 'is_superuser', 'is_active', )
 
-admin.site.register(Supernumerary, UserAdmin)
+admin.site.register(Supernumerary)
 admin.site.register(CustomUser)
 
