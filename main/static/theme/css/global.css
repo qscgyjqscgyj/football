@@ -342,6 +342,48 @@ a._news_all_name h3{
     text-decoration: none;
 }
 
+.statist_name {
+    font-size: 25px;
+    font-family: 'eurofurence light';
+}
+
+.statist_main {
+    margin-top: 30px;
+}
+
+.statist_middle {
+    min-height: 150px;
+}
+
+.statist_nickname {
+    color: green;
+    font-size: 25px;
+    font-family: 'eurofurence';
+    margin-left: 20px;
+}
+
+.statist_top {
+    margin-bottom: 10px;
+}
+
+.statist_right {
+    background: #2b9d66;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.statist_wrong {
+    background: #a80000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.statist_bottom {
+    text-align: right;
+}
+
 /*темизация календаря*/
 
 .fc-content a:hover {
