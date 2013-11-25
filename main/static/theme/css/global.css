@@ -43,7 +43,7 @@ body {
 
 ul.nav.my_nav {
     float: right;
-    margin-top: 13px;
+    /*margin-top: 13px;*/
 }
 
 .page-header.my_header {
@@ -119,7 +119,7 @@ a._news_all_link:hover {
 }
 
 .block_about {
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 a.my_btn {
@@ -170,7 +170,8 @@ a.my_btn:hover {
 
 .slogan_text p {
     text-transform: uppercase;
-    font-size: 20px;
+    font-family: 'eurofurence light';
+    font-size: 30px;
     color: #606060;
     text-align: right;
     margin-top: 10px;
@@ -324,4 +325,25 @@ a.my_btn:hover {
 
 a._news_all_name h3{
     font-family: 'eurofurence light';
+}
+
+.auth {
+    text-align: right;
+}
+
+.auth a {
+    padding: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.auth a:hover {
+    padding: 5px;
+    text-decoration: none;
+}
+
+/*темизация календаря*/
+
+.fc-content a:hover {
+    color: #fff;
 }
