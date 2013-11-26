@@ -1,4 +1,43 @@
 {% extends "base.html" %}
+
+{% block header %}
+{% endblock %}
+
+{% block slogan %}
+            <div id="slogan">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="row">
+                                <div class="span3 slogan_img">
+{#                                    <img src="{% static 'theme/img/baner_new1.jpg' %}" alt=""/>#}
+                                    <!--социальные кнопки-->
+                                    <div class="share">
+                                        <script type="text/javascript">(function() {
+                                          if (window.pluso)if (typeof window.pluso.start == "function") return;
+                                          if (window.ifpluso==undefined) { window.ifpluso = 1;
+                                            var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+                                            s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+                                            s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+                                            var h=d[g]('body')[0];
+                                            h.appendChild(s);
+                                          }})();</script>
+                                        <div class="pluso" data-background="transparent" data-options="medium,round,line,horizontal,counter,theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,pinterest,google"></div>
+                                    </div>
+                                    <!--конец социальным кнопкам-->
+                                </div>
+                                <div class="span9 slogan_text">
+                                    <div class="slogan_inner">
+                                        <p>Ставьте на верный результат</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
 {% block content %}
 <h4 class="_title">Авторизация</h4>
 

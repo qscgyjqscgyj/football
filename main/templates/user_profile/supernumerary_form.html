@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block content %}
-    <a href="/forecast/new">New Forecast</a>
+    <div class="forecast">
+        <a class="my_btn" href="/forecast/new">Создать новый прогноз</a>
+    </div>
     <form enctype="multipart/form-data" method="post">{% csrf_token %}
     <h2>Статист:</h2>
         {% for field in form %}

@@ -106,12 +106,13 @@ a._news_all_link:hover {
 
 .footer {
     background: url("../img/blue_header.jpg") center no-repeat;
-    height: 42px;
+    min-height: 42px;
     padding-top: 25px;
 }
 
 .footer p, .footer a {
     color: #fff;
+    padding: 5px;
 }
 
 .header {
@@ -246,6 +247,7 @@ a.my_btn:hover {
     transition: all .4s ease;
     /*font-size: 14px;*/
     line-height: 60px;
+    border:none;
 }
 
 .game_right a:hover {
@@ -332,14 +334,16 @@ a._news_all_name h3{
 }
 
 .auth a {
-    padding: 5px;
+    padding: 5px 0;
+    margin-left: 15px;
     text-decoration: none;
     text-transform: uppercase;
+    border-bottom: 1px solid #6290C2;
 }
 
 .auth a:hover {
-    padding: 5px;
     text-decoration: none;
+    border-bottom: 1px solid #406286;
 }
 
 .statist_name {
@@ -388,4 +392,15 @@ a._news_all_name h3{
 
 .fc-content a:hover {
     color: #fff;
+}
+
+/*fancybox iframe*/
+
+.fancybox-iframe body {
+    padding: 0;
+}
+
+/*forecast*/
+.forecast {
+    margin-top: 30px;
 }
