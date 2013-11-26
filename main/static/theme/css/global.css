@@ -177,7 +177,7 @@ a.my_btn:hover {
     text-align: right;
     margin-top: 10px;
     float: left;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .login {

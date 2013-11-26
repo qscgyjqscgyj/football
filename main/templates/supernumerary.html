@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load flatblock_tags %}
+
+{% block chart %}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Год', 'Правильные ответы', 'Неправильные ответы'],
+          ['10 мар',  30, 13],
+          ['15 мар',  46, 21],
+          ['21 мар',  67, 26],
+          ['23 мар',  54, 36],
+          ['03 апр',  32, 42],
+          ['12 апр',  82, 65],
+          ['17 апр',  162, 47]
+        ]);
+
+        var options = {
+          title: 'Успешность статиста'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
+
+ <!-- header -->
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="span6 _new">
+        <h3 class="statist_name">{{ supernumerary.fio }}</h3>
+        <div class="statist_middle">
+            {% thumbnail supernumerary.photo "150x150" crop="center" as im %}
+                <img class="_category-img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Иллюстрация" align="left" vspace="5" hspace="5">
+            {% endthumbnail %}
+            <p>{{ supernumerary.about }}</p>
+        </div>
+        <div class="statist_bottom">
+            <span>Краткая статистика:</span>
+            <span class="statist_right">{{ supernumerary.right }}</span>
+            <span class="statist_wrong">{{ supernumerary.wrong }}</span>
+        </div>
+        <hr>
+    </div>
+    <div class="span6">
+        <div id="chart_div" style="margin-top: 60px;"></div>
+    </div>
+</div>
+
+{% endblock %}
