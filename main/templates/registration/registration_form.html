@@ -1,34 +1,88 @@
 {% extends "base.html" %}
-{% block content %}
 {% load flatblock_tags %}
-<h4 class="_title">Регистрация</h4>
-{% flatblock 'Регистрация' %}
-<form method="post" class="_login-form form-horizontal">{% csrf_token %}
-    <table class="_ad-table">
-        <tr>
-            <td class="span2">{{ form.username.label }}</td>
-            <td class="span4">{{ form.username.errors }}{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.email.label }}</td>
-            <td>{{ form.email.errors }}{{ form.email }}</td>
-        </tr>
-                <tr>
-            <td>{{ form.password1.label }}</td>
-            <td>{{ form.password1.errors }}{{ form.password1 }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.password2.label }}</td>
-            <td>{{ form.password2.errors }}{{ form.password2 }}</td>
-        </tr>
-        <tr>
-            <td class="captcha-label">Код с картинки</td>
-            <td class="captcha-label">{{ form.captcha.errors }}{{ form.captcha }}</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Зарегестрироваться" class="btn btn-small _reg-form-button"></td>
-        </tr>
-    </table>
-</form>
+
+ <!-- header -->
+{% block header %}
+{% endblock %}
+
+{% block slogan %}
+    <div id="slogan">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="row">
+                        <div class="span3 slogan_img">
+{#                                    <img src="{% static 'theme/img/baner_new1.jpg' %}" alt=""/>#}
+                            <!--социальные кнопки-->
+                            <div class="share">
+                                <script type="text/javascript">(function() {
+                                  if (window.pluso)if (typeof window.pluso.start == "function") return;
+                                  if (window.ifpluso==undefined) { window.ifpluso = 1;
+                                    var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+                                    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+                                    s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+                                    var h=d[g]('body')[0];
+                                    h.appendChild(s);
+                                  }})();</script>
+                                <div class="pluso" data-background="transparent" data-options="medium,round,line,horizontal,counter,theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,pinterest,google"></div>
+                            </div>
+                            <!--конец социальным кнопкам-->
+                        </div>
+                        <div class="span9 slogan_text">
+                            <div class="slogan_inner">
+                                <p>Ставьте на верный результат</p>
+{#                                <p class="register_button">#}
+{#                                    <a href="/accounts/register/" class="my_btn">Зарегистрироваться</a>#}
+{#                                </p>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h4 class="_title">Регистрация</h4>
+    <div class="row">
+        <div class="span6">
+            <form method="post" class="_login-form form-horizontal">{% csrf_token %}
+                <table class="_ad-table">
+                    <tr>
+                        <td class="span2">{{ form.username.label }}</td>
+                        <td class="span4">{{ form.username.errors }}{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.email.label }}</td>
+                        <td>{{ form.email.errors }}{{ form.email }}</td>
+                    </tr>
+                            <tr>
+                        <td>{{ form.password1.label }}</td>
+                        <td>{{ form.password1.errors }}{{ form.password1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password2.label }}</td>
+                        <td>{{ form.password2.errors }}{{ form.password2 }}</td>
+                    </tr>
+                    <tr>
+                        <td class="captcha-label">Код с картинки</td>
+                        <td class="captcha-label">{{ form.captcha.errors }}{{ form.captcha }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Зарегестрироваться" class="btn btn-small _reg-form-button"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="span6">
+            {% flatblock 'Регистрация' %}
+        </div>
+        <div class="span12">
+            <p>
+                Регистрируясь на сайте вы принимаете условия договора.
+            </p>
+        </div>
+    </div>
 {% endblock %}
