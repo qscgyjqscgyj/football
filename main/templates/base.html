@@ -20,6 +20,9 @@
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'bootstrap/js/cariusel.js' %}" type="text/javascript"></script>
 {#        {% bootstrap_javascript_tag %}#}
+
+        {% block chart %}
+        {% endblock %}
         <script type="text/javascript" src="{% static 'libraries/calendar/jquery-ui.custom.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libraries/calendar/fullcalendar.js' %}"></script>
         <link rel="stylesheet" href="{% static 'libraries/fancybox/source/jquery.fancybox.css' %}" type="text/css" media="screen" />
@@ -114,6 +117,7 @@
                     <div class="row">
                         <div class="span12">
                             <div class="row">
+                                {% block share %}
                                 <div class="span3 slogan_img">
 {#                                    <img src="{% static 'theme/img/baner_new1.jpg' %}" alt=""/>#}
                                     <!--социальные кнопки-->
@@ -129,14 +133,17 @@
                                           }})();</script>
                                         <div class="pluso" data-background="transparent" data-options="medium,round,line,horizontal,counter,theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,pinterest,google"></div>
                                     </div>
-                                    <!--конец социальным кнопкам-->
+                                    {% endblock %}<!--конец социальным кнопкам-->
                                 </div>
                                 <div class="span9 slogan_text">
                                     <div class="slogan_inner">
                                         <p>Ставьте на верный результат</p>
-                                        <p class="register_button">
-                                            <a href="/accounts/register/" class="my_btn">Зарегистрироваться</a>
-                                        </p>
+                                        {% if user.is_authenticated %}
+                                        {% else %}
+                                            <p class="register_button">
+                                                <a href="/accounts/register/" class="my_btn">Зарегистрироваться</a>
+                                            </p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +190,7 @@
                                     {% for supernumerary in supernumeraries %}
                                         <div class="statist_top">
                                             <span class="statist_name">{{ supernumerary.fio }}</span>
-                                            <span class="statist_nickname">{{ supernumerary.username }}</span>
+                                            <span class="statist_nickname"><a href="/supernumerary/{{ supernumerary.pk }}">{{ supernumerary.username }}</a></span>
                                         </div>
                                         <div class="statist_middle">
                                             {% thumbnail supernumerary.photo "150x150" crop="center" as im %}
