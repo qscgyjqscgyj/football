@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load flatblock_tags %}
+
+{% block slider %}
+{% endblock %}
+
+{% block content %}
+    <div class="span12">
+    <div class="row">
+        <div class="span9 _new">
+            <h3>{{ supernumerary.username }}</h3>
+            {% thumbnail supernumerary.photo "350x250" crop="center" as im %}
+                <img class="_new_img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Иллюстрация" align="left" vspace="5" hspace="5">
+            {% endthumbnail %}
+            <p class="_new_date">{{ supernumerary.right }}</p>
+            <p class="_new_date">{{ supernumerary.wrong }}</p>
+            {% autoescape off %}<p>{{ new.text }}</p>{% endautoescape %}
+        </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
