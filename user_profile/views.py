@@ -2,7 +2,7 @@
 import hashlib
 import random
 from django.utils import timezone
-from django.contrib.auth.models import User, UserManager
+from django.contrib.auth.models import UserManager
 from django.contrib.auth.views import password_change
 from django.contrib.sites.models import Site, RequestSite
 from django.core.exceptions import ObjectDoesNotExist

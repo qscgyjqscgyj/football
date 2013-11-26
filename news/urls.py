@@ -5,5 +5,5 @@ from news.views import NewsListView, NewView
 
 urlpatterns = patterns('',
     url(r'^news$', NewsListView.as_view(), name='news'),
-    url(r'^new/(?P<pk>\d)$', NewView.as_view(), name='new'),
+    url(r'^new/(?P<pk>\d+)$', NewView.as_view(), name='new'),
 )

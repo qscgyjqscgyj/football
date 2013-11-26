@@ -30,7 +30,6 @@ class Supernumerary(User):
 #пользователь
 class CustomUser(User):
     fio = models.CharField(verbose_name=_(u'Ф.И.О.'), max_length=100)
-    photo = models.ImageField(verbose_name=_(u'Фото'), upload_to='custom_user_photo')
     left = models.IntegerField(verbose_name=_(u'Количество доступных прогнозов'), default=0)
     used = models.IntegerField(verbose_name=_(u'Количество использованных прогнозов'), default=0)
 

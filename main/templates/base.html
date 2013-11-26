@@ -183,7 +183,7 @@
                                     {% for supernumerary in supernumeraries %}
                                         <div class="statist_top">
                                             <span class="statist_name">{{ supernumerary.fio }}</span>
-                                            <span class="statist_nickname">{{ supernumerary.username }}</span>
+                                            <span class="statist_nickname"><a href="/supernumerary/{{ supernumerary.pk }}">{{ supernumerary.username }}</a></span>
                                         </div>
                                         <div class="statist_middle">
                                             {% thumbnail supernumerary.photo "150x150" crop="center" as im %}
