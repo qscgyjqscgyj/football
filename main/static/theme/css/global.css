@@ -211,7 +211,7 @@ a.my_btn:hover {
     border-top: 1px solid #b3b3b3;
     padding:10px 10px 0px 10px;
     float: left;
-    /*width: 100%;*/
+    width: 100%;
 }
 
 .game_in_list.first {
