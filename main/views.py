@@ -19,4 +19,3 @@ class SupernumeraryDetailView(DetailView):
     template_name = 'supernumerary.html'
     pk_url_kwarg = 'pk'
     context_object_name = 'supernumerary'
-

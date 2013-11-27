@@ -19,6 +19,7 @@
                 <p class="news_all_body">{{ new.text|removetags:"img"|truncatewords:"100"|safe }}</p>
                 <a class="_news_all_link" href="/new/{{ new.pk }}">Подробнее</a>
             </div>
+            <hr>
         {% endfor %}
         </div>
         <div class="span3 baner">
