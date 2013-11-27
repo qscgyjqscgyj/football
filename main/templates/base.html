@@ -27,12 +27,6 @@
         <script type="text/javascript" src="{% static 'libraries/calendar/fullcalendar.js' %}"></script>
         <link rel="stylesheet" href="{% static 'libraries/fancybox/source/jquery.fancybox.css' %}" type="text/css" media="screen" />
         <script type="text/javascript" src="{% static 'libraries/fancybox/source/jquery.fancybox.pack.js' %}"></script>
-    	<link href="{% static 'libraries/flot/examples.css' %}" rel="stylesheet" type="text/css">
-    	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{% static 'libraries/flot/excanvas.min.js' %}"></script><![endif]-->
-	    <script language="javascript" type="text/javascript" src="{% static 'libraries/flot/jquery.js' %}"></script>
-	    <script language="javascript" type="text/javascript" src="{% static 'libraries/flot/jquery.flot.js' %}"></script>
-        {% block flot %}
-        {% endblock %}
         <script type="text/javascript">
             $(document).ready(function() {
                 $(".fancybox").fancybox();
