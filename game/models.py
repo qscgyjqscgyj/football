@@ -35,9 +35,25 @@ class Forecast(models.Model):
     draw = models.BooleanField(verbose_name=_(u'Ничья'))
     win_team = models.ForeignKey(Team, verbose_name=_(u'Победившая команда'), related_name='forecast_team',
                                  blank=True, null=True)
+    detailed = models.CharField(verbose_name=_(u'Подробный прогноз'), max_length=100, blank=True, null=True)
+    right = models.BooleanField(verbose_name=_(u'Верный прогноз'))
+    wrong = models.BooleanField(verbose_name=_(u'Не верный прогноз'))
 
     def __unicode__(self):
         return self.game.__unicode__()
+
+    def save(self, *args, **kwargs):
+        if self.right:
+            supernumerary = Supernumerary.objects.get(id=self.supernumerary.pk)
+            supernumerary.right = F('right') + 1
+            supernumerary.save()
+        elif self.wrong:
+            supernumerary = Supernumerary.objects.get(id=self.supernumerary.pk)
+            supernumerary.wrong = F('wrong') + 1
+            supernumerary.save()
+        else:
+            return super(Forecast, self).save(*args, **kwargs)
+        return super(Forecast, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = _(u'Прогноз')
@@ -59,40 +75,7 @@ class Game(models.Model):
         return (unicode(self.sport) + " " + self.team1 +
                 " vs " + self.team2 + " " + str(self.date))
 
-    def save(self, *args, **kwargs):
-        if self.score or self.draw or self.win_team:
-            forecasts = Forecast.objects.filter(game=self)
-            for forecast in forecasts:
-                if forecast.score and forecast.draw and forecast.win_team:
-                    supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
-                    supernumerary.wrong = F('wrong') + 1
-                    supernumerary.save()
-                elif not forecast.score and not forecast.draw and not forecast.win_team:
-                    supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
-                    supernumerary.wrong = F('wrong') + 1
-                    supernumerary.save()
-                elif forecast.score and forecast.draw:
-                    supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
-                    supernumerary.wrong = F('wrong') + 1
-                    supernumerary.save()
-                elif forecast.draw and forecast.win_team:
-                    supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
-                    supernumerary.wrong = F('wrong') + 1
-                    supernumerary.save()
-                elif forecast.score and forecast.win_team:
-                    supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
-                    supernumerary.wrong = F('wrong') + 1
-                    supernumerary.save()
-                elif (forecast.score == self.score and forecast.score) or (forecast.draw == self.draw and forecast.draw) or (forecast.win_team == self.win_team and forecast.win_team):
-                    supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
-                    supernumerary.right = F('right') + 1
-                    supernumerary.save()
-                else:
-                    supernumerary = Supernumerary.objects.get(id=forecast.supernumerary.pk)
-                    supernumerary.wrong = F('wrong') + 1
-                    supernumerary.save()
-        super(Game, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = _(u'Игра')
         verbose_name_plural = _(u'Игры')
+        ordering = ('-date',)

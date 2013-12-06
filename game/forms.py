@@ -11,4 +11,4 @@ class ForecastForm(forms.ModelForm):
             pass
 
         model = Forecast
-        exclude = ('supernumerary', )
+        exclude = ('supernumerary', 'right', 'wrong', )

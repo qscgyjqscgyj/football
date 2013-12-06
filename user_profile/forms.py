@@ -18,7 +18,7 @@ class SupernumeraryProfileForm(forms.ModelForm):
 
         model = Supernumerary
         exclude = ('password', 'last_login', 'is_superuser', 'groups', 'user_permissions', 'first_name', 'last_name',
-                   'is_staff', 'is_active', 'date_joined',)
+                   'is_staff', 'is_active', 'date_joined', 'right', 'wrong', )
 
 
 class CustomUserProfileForm(forms.ModelForm):
