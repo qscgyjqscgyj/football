@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from registration.models import RegistrationManager
-from user_profile.models import Supernumerary, CustomUser
 
 
 class Package(models.Model):
@@ -12,7 +9,7 @@ class Package(models.Model):
     forecasts = models.IntegerField(verbose_name=_(u'Количество прогнозов'))
     image = models.ImageField(verbose_name=_(u'Изображение'), upload_to='packages_images')
     about = models.TextField(verbose_name=_(u'Описание'))
-    supernumerary = models.ForeignKey(Supernumerary, verbose_name=_(u'Статист'), related_name='package_supernumerary')
+    supernumerary = models.ForeignKey('user_profile.Supernumerary', verbose_name=_(u'Статист'), related_name='package_supernumerary')
 
     def __unicode__(self):
         return self.name
@@ -27,7 +24,7 @@ class Package(models.Model):
 
 
 class UserPackage(models.Model):
-    user = models.ForeignKey(CustomUser, verbose_name=_(u'Пользователь'), related_name='user_package_custom_user')
+    user = models.ForeignKey('user_profile.CustomUser', verbose_name=_(u'Пользователь'), related_name='user_package_custom_user')
     package = models.ForeignKey(Package, verbose_name=_(u'Пакет'), related_name='user_package_package')
     predictions = models.IntegerField(verbose_name=_(u'Оставшиеся прогнозы'))
 

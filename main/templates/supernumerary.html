@@ -8,16 +8,9 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Год', 'Правильные ответы', 'Неправильные ответы'],
-          ['10 мар',  30, 13],
-          ['15 мар',  46, 21],
-          ['21 мар',  67, 26],
-          ['23 мар',  54, 36],
-          ['03 апр',  32, 42],
-          ['12 апр',  82, 65],
-          ['17 апр',  162, 47]
-        ]);
+        var data = google.visualization.arrayToDataTable(
+            {{ graph|safe }}
+        );
 
         var options = {
           title: 'Успешность статиста'
