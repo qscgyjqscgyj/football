@@ -96,7 +96,8 @@ INSTALLED_APPS = (
     'redactor',
     'flatblocks',
     'bootstrap',
-    'bootstrap_toolkit'
+    'bootstrap_toolkit',
+    'robokassa',
 
 )
 
