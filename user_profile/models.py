@@ -12,6 +12,7 @@ class Supernumerary(User):
     right = models.IntegerField(verbose_name=_(u'Количество верных прогнозов'), default=0)
     wrong = models.IntegerField(verbose_name=_(u'Количество неверных прогнозов'), default=0)
     about = models.TextField(verbose_name=_(u'О статисте'))
+    users = models.ManyToManyField('CustomUser', verbose_name=_(u'Пользователи'), blank=True, null=True)
 
     objects = RegistrationManager()
 

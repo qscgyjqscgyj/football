@@ -106,6 +106,7 @@ LOCAL_APPS = (
     'news',
     'slider',
     'game',
+    'packages',
 )
 
 # A sample logging configuration. The only tangible logging
