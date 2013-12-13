@@ -96,7 +96,8 @@ INSTALLED_APPS = (
     'redactor',
     'flatblocks',
     'bootstrap',
-    'bootstrap_toolkit'
+    'bootstrap_toolkit',
+    'robokassa',
 
 )
 
@@ -106,6 +107,7 @@ LOCAL_APPS = (
     'news',
     'slider',
     'game',
+    'packages',
 )
 
 # A sample logging configuration. The only tangible logging
