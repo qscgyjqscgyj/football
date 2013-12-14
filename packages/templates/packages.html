@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load flatblock_tags %}
+
+{% block calendar_js %}
+{% endblock %}
+
+
+
+{% block content %}
+    {% for pack in packages %}
+        <p>{{ pack.name }}</p>
+        <p>{{ pack.price }}</p>
+        <p>{{ pack.forecasts }}</p>
+        <p>{{ pack.image }}</p>
+        <p>{{ pack.about }}</p>
+        <a href="/package/pre-create/{{ pack.pk }}"><input type="submit" value="Buy"></a>
+        <hr>
+    {% endfor %}
+{% endblock %}

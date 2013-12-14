@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load flatblock_tags %}
+
+{% block calendar_js %}
+{% endblock %}
+
+{% block content %}
+    {% if supernumerary_error %}
+        <h1>ВЫБЕРИ КА СТАТИСТА!</h1>
+    {% else %}
+        <h1>ВЫ УВЕРЕНЫ, ЧТО ПАКЕТ ХОЧЕТ БЫТЬ КУПЛЕНЫМ ВАМИ?</h1>
+    {% endif %}
+    <form method="post" action="/package/create/{{ package.pk }}">{% csrf_token %}
+        <p>{{ package.name }}</p>
+        <p>{{ package.price }}</p>
+        <p>{{ package.forecasts }}</p>
+        <p>{{ package.image }}</p>
+        <p>{{ package.about }}</p>
+        <select name="supernumerary">
+            <option value="none">---------</option>
+            {% for supernumerary in supernumeraries %}
+                <option value="{{ supernumerary.pk }}">{{ supernumerary }}</option>
+            {% endfor %}
+        </select>
+        <p><input type="checkbox" id="agreement" name="agreement">Соглашение</p>
+        <input type="submit" value="Buy">
+    </form>
+{% endblock %}

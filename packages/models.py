@@ -9,7 +9,6 @@ class Package(models.Model):
     forecasts = models.IntegerField(verbose_name=_(u'Количество прогнозов'))
     image = models.ImageField(verbose_name=_(u'Изображение'), upload_to='packages_images')
     about = models.TextField(verbose_name=_(u'Описание'))
-    supernumerary = models.ForeignKey('user_profile.Supernumerary', verbose_name=_(u'Статист'), related_name='package_supernumerary')
 
     def __unicode__(self):
         return self.name
@@ -24,9 +23,13 @@ class Package(models.Model):
 
 
 class UserPackage(models.Model):
-    user = models.ForeignKey('user_profile.CustomUser', verbose_name=_(u'Пользователь'), related_name='user_package_custom_user')
+    user = models.ForeignKey('user_profile.CustomUser', verbose_name=_(u'Пользователь'),
+                             related_name='user_package_custom_user')
     package = models.ForeignKey(Package, verbose_name=_(u'Пакет'), related_name='user_package_package')
     predictions = models.IntegerField(verbose_name=_(u'Оставшиеся прогнозы'))
+    supernumerary = models.ForeignKey('user_profile.Supernumerary', verbose_name=_(u'Статист'),
+                                      related_name='user_package_supernumerary', blank=True, null=True)
+    active = models.BooleanField(verbose_name=_(u'Активен после оплаты'), default=False)
 
     def __unicode__(self):
         return unicode(self.user)
