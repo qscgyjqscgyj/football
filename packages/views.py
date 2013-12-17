@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from robokassa.forms import RobokassaForm
+from slider.models import Slider
 from packages.models import Package, UserPackage
 from user_profile.models import Supernumerary
 
@@ -12,6 +13,11 @@ class PackagesListView(ListView):
     model = Package
     template_name = 'packages.html'
     context_object_name = 'packages'
+
+    def get_context_data(self, **kwargs):
+        context = super(PackagesListView, self).get_context_data(**kwargs)
+        context['slides'] = Slider.objects.all()
+        return context
 
 
 def create_user_package(request, pk):

@@ -1,20 +1,34 @@
 {% extends 'base.html' %}
-{% load thumbnail %}
+{% load staticfiles %}
 {% load flatblock_tags %}
-
+{% load thumbnail %}
 {% block calendar_js %}
 {% endblock %}
 
-
-
 {% block content %}
-    {% for pack in packages %}
-        <p>{{ pack.name }}</p>
-        <p>{{ pack.price }}</p>
-        <p>{{ pack.forecasts }}</p>
-        <p>{{ pack.image }}</p>
-        <p>{{ pack.about }}</p>
-        <a href="/package/pre-create/{{ pack.pk }}"><input type="submit" value="Buy"></a>
-        <hr>
-    {% endfor %}
+    <div class="row">
+        {% for pack in packages %}
+            <div class="span3">
+                <div class="package">
+                   <div class="name_pack">
+                        <h2>{{ pack.name }}</h2>
+                    </div>
+                    <div class="price_pack">
+                        <h3>{{ pack.price }}р. / {{ pack.forecasts }}<span> подписок</span></h3>
+                    </div>
+                    <div class="img_pack">
+                        {% thumbnail pack.image "30x30" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Иллюстрация" vspace="5" hspace="5">
+                        {% endthumbnail %}
+                    </div>
+                    <div class="about_pack">
+                        <p>{{ pack.about }}</p>
+                    </div>
+                    <div class="button_pack">
+                        <a href="/package/pre-create/{{ pack.pk }}"><input type="submit"  class="btn btn-large btn-primary" value="Купить"></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -404,3 +404,25 @@ a._news_all_name h3{
 .forecast {
     margin-top: 30px;
 }
+
+/*packages*/
+.package {
+    margin: 10px 0;
+    padding: 10px 0;
+    background: #fff;
+    color: #383838;
+    min-height: 300px!important;
+    padding: 10px;
+    border: 1px solid #CECECE;
+}
+
+.price_pack span {
+    font-size: 15px;
+}
+
+.img_pack {
+    text-align: center;
+}
+.button_pack {
+    text-align: center;
+}
