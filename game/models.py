@@ -78,4 +78,4 @@ class Game(models.Model):
     class Meta:
         verbose_name = _(u'Игра')
         verbose_name_plural = _(u'Игры')
-        ordering = ('-date',)
+        ordering = ('date',)

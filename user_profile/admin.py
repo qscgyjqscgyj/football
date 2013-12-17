@@ -11,7 +11,7 @@ class SupernumeraryChangeForm(UserChangeForm):
         model = Supernumerary
 
 
-class CustomAdmin(UserAdmin):
+class SupernumeraryAdmin(UserAdmin):
     list_display = ('username', 'email', 'is_active', 'fio', )
     form = SupernumeraryChangeForm
 
@@ -19,6 +19,21 @@ class CustomAdmin(UserAdmin):
         (None, {'fields': ('fio', 'photo', 'right', 'wrong', 'about')}),
     )
 
-admin.site.register(Supernumerary, CustomAdmin)
-admin.site.register(CustomUser)
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+
+
+class CustomUserAdmin(UserAdmin):
+    list_display = ('username', 'email', 'is_active', 'fio', )
+    form = CustomUserChangeForm
+
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {'fields': ('fio', 'left', 'used', 'packages')}),
+    )
+
+admin.site.register(Supernumerary, SupernumeraryAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
 

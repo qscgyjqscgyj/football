@@ -25,19 +25,15 @@ class SupernumeraryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SupernumeraryDetailView, self).get_context_data(**kwargs)
-        context['graph'] = [['Дата', 'Правильные ответы', 'Неправильные ответы']]
+        context['graph'] = [['Дата', 'right', 'wrong']]
         forecasts = Forecast.objects.filter(supernumerary=self.object).order_by('game')
         right = 0
         wrong = 0
         for forecast in forecasts:
             if forecast.right:
-                if wrong > 0:
-                    wrong -= 1
-                context['graph'].append([str(forecast.game.date.year + forecast.game.date.month), right + 1, wrong])
+                context['graph'].append([str(forecast.game.date.day) + '.' + str(forecast.game.date.month), right + 1, wrong])
                 right += 1
             elif forecast.wrong:
-                if right > 0:
-                    right -= 1
-                context['graph'].append([str(forecast.game.date.year + forecast.game.date.month), right, wrong + 1])
+                context['graph'].append([str(forecast.game.date.day) + '.' + str(forecast.game.date.month), right, wrong + 1])
                 wrong += 1
         return context
