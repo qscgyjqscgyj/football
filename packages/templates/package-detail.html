@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load flatblock_tags %}
+
+{% block calendar_js %}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    <div class="package_detail">
+            {% if supernumerary_error %}
+        <h1>Пожалуйста, выбирите Эесперта!</h1>
+    {% else %}
+        <h1>Вы уверены, что хотите купить этот пакет?</h1>
+    {% endif %}
+    <form method="post" action="/package/create/{{ package.pk }}">{% csrf_token %}
+        <p>{{ package.name }}</p>
+        <p>{{ package.price }}</p>
+        <p>{{ package.forecasts }}</p>
+        <p>{{ package.image }}</p>
+        <p>{{ package.about }}</p>
+        <select name="supernumerary">
+            <option value="none">---------</option>
+            {% for supernumerary in supernumeraries %}
+                <option value="{{ supernumerary.pk }}">{{ supernumerary }}</option>
+            {% endfor %}
+        </select>
+        <p><input type="checkbox" id="agreement" name="agreement">Соглашение</p>
+        <input type="submit" value="Buy">
+    </form>
+
+    </div>
+    <div class="row">
+        {% for pack in packages %}
+            <div class="span3">
+                <div class="package">
+                   <div class="name_pack">
+                        <h2>{{ pack.name }}</h2>
+                    </div>
+                    <div class="price_pack">
+                        <h3>{{ pack.price }}р. / {{ pack.forecasts }}<span> подписок</span></h3>
+                    </div>
+                        {% thumbnail pack.image "30x30" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Иллюстрация" vspace="5" hspace="5">
+                        {% endthumbnail %}
+                    </div>
+                    <div class="about_pack">
+                        <p>{{ pack.about }}</p>
+                    </div>
+                    <div class="button_pack">
+                        <a href="/package/pre-create/{{ pack.pk }}"><input type="submit"  class="btn btn-large btn-primary" value="Купить"></a>
+                    </div>
+                </div>
+            </div>
+                    <div class="img_pack">
+        {% endfor %}
+    </div>
+{% endblock %}
