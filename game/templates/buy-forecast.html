@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load flatblock_tags %}
+
+{% block calendar_js %}
+{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block share %}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    {% if supernumeraries %}
+        {% if supernumerary_error %}
+            <h1>ВЫБЕРИ КА СТАТИСТА!</h1>
+        {% else %}
+            <h1>ВЫ УВЕРЕНЫ, ЧТО ПРОГНОЗ НА ИГРУ ХОЧЕТ БЫТЬ КУПЛЕНЫМ ВАМИ?</h1>
+        {% endif %}
+        <form method="post" action="/package/create/{{ package.pk }}">{% csrf_token %}
+            <p>{{ game.date }}</p>
+            <p>{{ game.sport }}</p>
+            <span>{{ game.team1 }}</span>
+            <span> VS </span>
+            <span>{{ game.team2 }}</span>
+            <select name="supernumerary">
+                <option value="none">---------</option>
+                {% for supernumerary in supernumeraries %}
+                    <option value="{{ supernumerary.pk }}">{{ supernumerary }}</option>
+                {% endfor %}
+            </select>
+            <p><input type="checkbox" id="agreement" name="agreement">Соглашение</p>
+            <input type="submit" value="Buy">
+        </form>
+    {% else %}
+        <h1>НА ЭТУ ИГРУ ПОКА НЕТ ПРОГНОЗОВ!</h1>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
