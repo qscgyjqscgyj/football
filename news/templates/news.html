@@ -21,7 +21,24 @@
             </div>
             <hr>
         {% endfor %}
+
+        {% if jobs_all_pages != 0 %}
+            <div class="pagination">
+                <p class="show">
+                    {% if news.has_previous %}
+                        <a class="show_by" href="?page=1">Первая</a>
+                        ←<a class="show_by" href="?page={{ news.previous_page_number }}">Предыдущая</a>
+                    {% endif %}
+                    Всего позиций: {{ news_len }}. Страница: {{ news.number }} из {{ news.paginator.num_pages }}.
+                    {% if news.has_next %}
+                        <a class="show_by" href="?page={{ news.next_page_number }}&show={{ show }}">Следующая</a>→
+                        <a class="show_by" href="?page={{ news_all_pages }}&show={{ show }}">Последняя</a>
+                    {% endif %}
+                </p>
+            </div>
+        {% endif %}
         </div>
+
         <div class="span3 baner">
             <div class="menu_right">
                 {% flatblock 'block_menu' %}

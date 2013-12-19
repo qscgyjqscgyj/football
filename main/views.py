@@ -6,6 +6,20 @@ from game.models import Game, Forecast
 from user_profile.models import Supernumerary
 
 
+class Foo(object):
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return '%s' % self.name
+
+    def __unicode__(self):
+        return '%s' % self.name.decode('utf-8')
+
+    def __repr__(self):
+        return '%s' % self.name
+
+
 class MainView(TemplateView):
     template_name = 'base.html'
 
@@ -13,7 +27,10 @@ class MainView(TemplateView):
         context = super(MainView, self).get_context_data()
         context['slides'] = Slider.objects.all()
         context['games'] = Game.objects.all()
-        context['supernumeraries'] = Supernumerary.objects.all()
+        supernumeraries = []
+        for supernumerary in Supernumerary.objects.all().order_by('-right'):
+            supernumeraries.append(supernumerary)
+        context['supernumeraries'] = [supernumeraries[0], supernumeraries[1]]
         return context
 
 
@@ -25,7 +42,7 @@ class SupernumeraryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SupernumeraryDetailView, self).get_context_data(**kwargs)
-        context['graph'] = [['Дата', 'right', 'wrong']]
+        context['graph'] = []
         forecasts = Forecast.objects.filter(supernumerary=self.object).order_by('game')
         right = 0
         wrong = 0
