@@ -266,6 +266,43 @@ a.my_btn:hover {
     /*border: 1px solid #9F9F9F;*/
 }
 
+.game_link a {
+    background: url("../img/button_big.jpg") no-repeat;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    padding:12px 10px;
+    color: #F1F1F1;
+    text-transform: uppercase;
+    border: 1px solid #767676;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    font-size: 14px;
+    font-family: 'eurofurence light';
+    font-size: 20px;
+}
+
+.game_link a:hover {
+    background: url("../img/button_big.jpg") no-repeat;
+    -moz-background-size: 160%; /* Firefox 3.6+ */
+    -webkit-background-size: 160%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 160%; /* Opera 9.6+ */
+    background-size: 160%; /* Современные браузеры */
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #9F9F9F;
+}
+
+.game_link {
+    float: left;
+    width: 40%;
+    margin-top: 20px;
+}
+
 .sport_name {
     color: green;
     text-transform: uppercase;
@@ -426,3 +463,4 @@ a._news_all_name h3{
 .button_pack {
     text-align: center;
 }
+

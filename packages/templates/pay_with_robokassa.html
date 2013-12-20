@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
+{% block header %}
+{% endblock %}
+
 {% block content %}
     <form action="{{ form.target }}" method="POST">
         <p>{{ form.as_p }}</p>
-        <p><input type="submit" value="Купить"></p>
+        <p><input type="submit" class="btn btn-large btn-primary" value="Купить"></p>
     </form>
 {% endblock %}
