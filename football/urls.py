@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^captcha/', include('captcha.urls')),
     url(r'^redactor/', include('redactor.urls')),
     url(r'^flatblocks/', include("flatblocks.urls")),
-
+    url(r'^robokassa/', include('robokassa.urls')),
 )
 
 if settings.DEBUG:
