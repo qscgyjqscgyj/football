@@ -2,10 +2,13 @@
 import json
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
+from robokassa.forms import RobokassaForm
 from game.forms import ForecastForm
 from game.models import *
 import datetime
+from packages.models import UserPackage, Package
 from user_profile.models import CustomUser
 
 
@@ -77,3 +80,41 @@ class NewForecastView(FormView):
             return kwargs
         except ObjectDoesNotExist:
             return kwargs
+
+
+class BuyForecast(DetailView):
+    template_name = 'buy-forecast.html'
+    pk_url_kwarg = 'pk'
+    model = Game
+    context_object_name = 'game'
+
+
+def pay_for_one_forecast(request, order_pk):
+    order = get_object_or_404(UserPackage, pk=UserPackage.objects.get(pk=order_pk).pk)
+    form = RobokassaForm(initial={'OutSum': order.package.price, 'InvId': order.pk, 'Desc': 'test',
+                                  'Email': order.user.email, 'MrchLogin': 'newtopbet'})
+                # 'IncCurrLabel': '',
+                # 'Culture': 'ru'
+
+    return render(request, 'pay_with_robokassa.html', {'form': form})
+
+
+def buy_forecast(request, pk):
+    game = Game.objects.get(pk=int(pk))
+    supernumeraries = []
+    for forecast in Forecast.objects.all():
+        if forecast.game == game:
+            supernumeraries.append(forecast.supernumerary)
+    if request.method == 'POST' and request.POST['supernumerary'] != 'none':
+        supernumerary = Supernumerary.objects.get(pk=int(request.POST['supernumerary']))
+        try:
+            user_package = UserPackage.objects.create(user=request.user.customuser,
+                                                      package=Package.objects.get(one=True),
+                                                      predictions=1, supernumerary=supernumerary)
+            return pay_for_one_forecast(request, user_package.pk)
+        except ObjectDoesNotExist and AttributeError:
+            return HttpResponseRedirect('/')
+    else:
+        return render(request, 'buy-forecast.html', {'supernumerary_error': True, 'game': game,
+                                                     'package': Package.objects.get(one=True),
+                                                     'supernumeraries': supernumeraries})

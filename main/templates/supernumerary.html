@@ -7,11 +7,12 @@
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
+      var graphdata = {% autoescape off %}{{ graph|safe }}{% endautoescape %};
+      graphdata.unshift(['Дата', 'Верные прогнозы', 'Неверные прогнозы']);
       function drawChart() {
         var data = google.visualization.arrayToDataTable(
-            {{ graph|safe }}
+            graphdata
         );
-
         var options = {
           title: 'Успешность статиста'
         };
