@@ -14,20 +14,27 @@
 {% block header %}
 {% endblock %}
 
+{% block slogan %}
+{% endblock %}
+
 {% block content %}
     <div class="game_detail">
-        <div class="game_date">
-            {{ game.date }}
+        <div class="game_left">
+            <div class="game_date">
+                {{ game.date }}
+            </div>
+            <div class="game_sport">
+                {{ game.sport }}
+            </div>
+            <div class="game_team">
+                <span>{{ game.team1 }}</span>
+                <span> VS </span>
+                <span>{{ game.team2 }}</span>
+            </div>
         </div>
-        <div class="game_sport">
-            {{ game.sport }}
+        <div class="game_link">
+            <a target="_parent" href="/forecast/buy/{{ game.pk }}">Купить прогноз на игру</a>
         </div>
-        <div class="game_team">
-            <span>{{ game.team1 }}</span>
-            <span> VS </span>
-            <span>{{ game.team2 }}</span>
-        </div>
-    <a href="/forecast/buy/{{ game.pk }}">Купить прогноз на игру</a>
     </div>
 {% endblock %}
 

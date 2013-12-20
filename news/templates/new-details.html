@@ -16,8 +16,10 @@
             <p class="_new_date">{{ new.date }}</p>
             {% autoescape off %}<p>{{ new.text }}</p>{% endautoescape %}
         </div>
-        <div class="span3 _sidebar">
-            {% flatblock "block_menu" %}
+        <div class="span3 baner">
+            <div class="menu_right">
+                {% flatblock 'block_menu' %}
+            </div>
         </div>
     </div>
     </div>
