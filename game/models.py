@@ -86,13 +86,12 @@ class UserForecast(models.Model):
                              related_name='user_forecast_user')
     supernumerary = models.ForeignKey('user_profile.Supernumerary', verbose_name=_(u'Статист'),
                                       related_name='user_forecast_supernumerary')
-    date = models.DateField(verbose_name=_(u'Дата прогноза'), auto_now_add=True)
-    game = models.ForeignKey('Game', verbose_name=_(u'Игра'), related_name='user_forecast_game')
+    date = models.DateTimeField(verbose_name=_(u'Дата прогноза'), auto_now_add=True)
     forecast = models.ForeignKey('Forecast', verbose_name=_(u'Прогноз специалиста'),
                                  related_name='user_forecast_forecast')
 
     def __unicode__(self):
-        return self.game.__unicode__()
+        return self.forecast.__unicode__()
 
     class Meta:
         verbose_name = _(u'Пользовательский прогноз')

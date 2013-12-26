@@ -73,20 +73,19 @@ class NewForecastView(FormView):
                                                                active=True)
                         if user_package:
                             if user_package.predictions > 0:
-                                context = Context({
-                                    'name': user.username,
-                                })
-                                send_mail_about_forecast.apply_async((context, user.email), retry=True)
                                 user_package.predictions = F('predictions') - 1
                                 user_package.save()
                                 user_forecast = UserForecast.objects.create(user=user,
                                                                             supernumerary=self.request.user.supernumerary,
-                                                                            game=Game.objects.get(
-                                                                                pk=int(self.request.POST['game'])),
                                                                             forecast=Forecast.objects.get(supernumerary=self.request.user.supernumerary,
-                                                                                                          game=Game.objects.get(pk=int(self.request.POST['game'])),
-))
+                                                                                                          game=Game.objects.get(pk=int(self.request.POST['game']))
+                                                                            ,))
                                 user_forecast.save()
+                                context = Context({
+                                    'name': user.username,
+                                    'user_forecast': user_forecast,
+                                })
+                                send_mail_about_forecast.apply_async((context, user.email), retry=True)
                             else:
                                 user_package.delete()
                         return HttpResponseRedirect(self.get_success_url())

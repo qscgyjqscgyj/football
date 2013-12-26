@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import UpdateView
 from registration import signals
 from registration.models import RegistrationProfile
-from game.models import Forecast
+from game.models import Forecast, UserForecast
 from packages.models import UserPackage
 from user_profile.forms import *
 from user_profile.models import *
@@ -124,6 +124,11 @@ class CustomProfileView(UpdateView):
         context['forecasts'] = Forecast.objects.filter(supernumerary=self.request.user)
         try:
             context['user_packages'] = UserPackage.objects.filter(user=self.object, active=True)
+            user_forecasts = []
+            for forecast in UserForecast.objects.filter(user=self.object):
+                if forecast.date < forecast.forecast.game.date:
+                    user_forecasts.append(forecast)
+            context['user_forecasts'] = user_forecasts
             return context
         except ObjectDoesNotExist:
             return context
