@@ -4,17 +4,38 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post">{% csrf_token %}
-    <h2>Пользователь: </h2>
-        {% for field in form %}
-            <dt>{{ field.label }}:</dt>
-            <dd class="clearfix">
-                {{ field }}
-                {{ field.errors }}
-            </dd>
-        {% endfor %}
-        <input type="submit" value="Сохранить данные" class="clearfix">
-    </form>
-    {{ user_packages }}
-    {{ user_forecasts }}
+    <div class="row">
+        <div class="span4">
+            <form method="post">{% csrf_token %}
+            <h2>Пользователь: </h2>
+                {% for field in form %}
+                    <dt>{{ field.label }}:</dt>
+                    <dd class="clearfix">
+                        {{ field }}
+                        {{ field.errors }}
+                    </dd>
+                {% endfor %}
+                <input style="margin-left: 10px;" class="btn btn-small btn-primary" type="submit" value="Сохранить данные" class="clearfix">
+            </form>
+        </div>
+        <div class="span4">
+            <h4>Купленные пакеты:</h4>
+            {% for packages in user_packages %}
+                <div>
+                    {{ packages.package }}
+                    {{ packages.supernumerary }}
+                    <p>Кол-во оставшихся прогнозов: {{ packages.predictions }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="span4">
+            <h4>Актуальные прогнозы:</h4>
+            {% for forecast in user_forecasts %}
+                {{ forecast.forecast }}
+                {{ forecast.supernumerary }}
+                <p>Дата игры: {{ forecast.forecast.game.date }}</p>
+                <p>Прогноз: {{ forecast.forecast.detailed }}</p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
