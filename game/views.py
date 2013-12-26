@@ -128,6 +128,9 @@ def buy_forecast(request, pk):
     if request.method == 'POST' and request.POST['supernumerary'] != 'none':
         supernumerary = Supernumerary.objects.get(pk=int(request.POST['supernumerary']))
         try:
+            user_forecast = UserForecast.objects.create(user=request.user.customuser, supernumerary=supernumerary,
+                                                        forecast=Forecast.objects.get(supernumerary=supernumerary, game=game))
+            user_forecast.save()
             user_package = UserPackage.objects.create(user=request.user.customuser,
                                                       package=Package.objects.get(one=True),
                                                       predictions=1, supernumerary=supernumerary)
