@@ -79,3 +79,22 @@ class Game(models.Model):
         verbose_name = _(u'Игра')
         verbose_name_plural = _(u'Игры')
         ordering = ('date',)
+
+
+class UserForecast(models.Model):
+    user = models.ForeignKey('user_profile.CustomUser', verbose_name=_(u'Пользователь'),
+                             related_name='user_forecast_user')
+    supernumerary = models.ForeignKey('user_profile.Supernumerary', verbose_name=_(u'Статист'),
+                                      related_name='user_forecast_supernumerary')
+    date = models.DateField(verbose_name=_(u'Дата прогноза'), auto_now_add=True)
+    game = models.ForeignKey('Game', verbose_name=_(u'Игра'), related_name='user_forecast_game')
+    forecast = models.ForeignKey('Forecast', verbose_name=_(u'Прогноз специалиста'),
+                                 related_name='user_forecast_forecast')
+
+    def __unicode__(self):
+        return self.game.__unicode__()
+
+    class Meta:
+        verbose_name = _(u'Пользовательский прогноз')
+        verbose_name_plural = _(u'Пользовательские прогнозы')
+        ordering = ('date',)

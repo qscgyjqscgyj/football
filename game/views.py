@@ -10,6 +10,9 @@ from game.models import *
 import datetime
 from packages.models import UserPackage, Package
 from user_profile.models import CustomUser
+from game.tasks import send_mail_about_forecast
+from django.template import Context
+from django.db.models import F
 
 
 class GameListView(ListView):
@@ -63,7 +66,32 @@ class NewForecastView(FormView):
                 message = form_class.save()
                 message.supernumerary = self.request.user.supernumerary
                 message.save()
-            return HttpResponseRedirect(self.get_success_url())
+                users = self.request.user.supernumerary.users.all()
+                for user in users:
+                    try:
+                        user_package = UserPackage.objects.get(user=user, supernumerary=self.request.user.supernumerary,
+                                                               active=True)
+                        if user_package:
+                            if user_package.predictions > 0:
+                                context = Context({
+                                    'name': user.username,
+                                })
+                                send_mail_about_forecast.apply_async((context, user.email), retry=True)
+                                user_package.predictions = F('predictions') - 1
+                                user_package.save()
+                                user_forecast = UserForecast.objects.create(user=user,
+                                                                            supernumerary=self.request.user.supernumerary,
+                                                                            game=Game.objects.get(
+                                                                                pk=int(self.request.POST['game'])),
+                                                                            forecast=Forecast.objects.get(supernumerary=self.request.user.supernumerary,
+                                                                                                          game=Game.objects.get(pk=int(self.request.POST['game'])),
+))
+                                user_forecast.save()
+                            else:
+                                user_package.delete()
+                        return HttpResponseRedirect(self.get_success_url())
+                    except ObjectDoesNotExist:
+                        return HttpResponseRedirect(self.get_success_url())
 
     def get_form_kwargs(self):
         kwargs = super(NewForecastView, self).get_form_kwargs()
@@ -80,13 +108,6 @@ class NewForecastView(FormView):
             return kwargs
         except ObjectDoesNotExist:
             return kwargs
-
-
-class BuyForecast(DetailView):
-    template_name = 'buy-forecast.html'
-    pk_url_kwarg = 'pk'
-    model = Game
-    context_object_name = 'game'
 
 
 def pay_for_one_forecast(request, order_pk):

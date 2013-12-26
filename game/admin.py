@@ -11,4 +11,6 @@ class ForecastAdmin(admin.ModelAdmin):
 admin.site.register(Game)
 admin.site.register(Team)
 admin.site.register(SportType)
+admin.site.register(UserForecast)
 admin.site.register(Forecast, ForecastAdmin)
+
