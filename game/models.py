@@ -89,6 +89,8 @@ class UserForecast(models.Model):
     date = models.DateTimeField(verbose_name=_(u'Дата прогноза'), auto_now_add=True)
     forecast = models.ForeignKey('Forecast', verbose_name=_(u'Прогноз специалиста'),
                                  related_name='user_forecast_forecast')
+    one = models.BooleanField(verbose_name=_(u'Единичный прогноз'), default=False)
+    one_package = models.ForeignKey('packages.UserPackage', verbose_name=_(u'Единичный пакет'), blank=True, null=True)
 
     def __unicode__(self):
         return self.forecast.__unicode__()
