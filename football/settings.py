@@ -98,7 +98,8 @@ INSTALLED_APPS = (
     'bootstrap',
     'bootstrap_toolkit',
     'robokassa',
-
+    'djcelery',
+    'djkombu',
 )
 
 LOCAL_APPS = (
@@ -109,6 +110,13 @@ LOCAL_APPS = (
     'game',
     'packages',
 )
+
+import djcelery
+djcelery.setup_loader()
+
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+CELERY_ALWAYS_EAGER = False
+BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

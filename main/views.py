@@ -29,6 +29,8 @@ class MainView(TemplateView):
         context['games'] = Game.objects.all()
         supernumeraries = []
         for supernumerary in Supernumerary.objects.all().order_by('-right'):
+            supernumerary.right_forecasts = len(Forecast.objects.filter(supernumerary=supernumerary, right=True))
+            supernumerary.wrong_forecasts = len(Forecast.objects.filter(supernumerary=supernumerary, wrong=True))
             supernumeraries.append(supernumerary)
         context['supernumeraries'] = [supernumeraries[0], supernumeraries[1]]
         return context
@@ -53,4 +55,6 @@ class SupernumeraryDetailView(DetailView):
             elif forecast.wrong:
                 context['graph'].append([str(forecast.game.date.day) + '.' + str(forecast.game.date.month), right, wrong + 1])
                 wrong += 1
+        self.object.right_forecasts = len(Forecast.objects.filter(supernumerary=self.object, right=True))
+        self.object.wrong_forecasts = len(Forecast.objects.filter(supernumerary=self.object, wrong=True))
         return context

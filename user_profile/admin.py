@@ -16,7 +16,7 @@ class SupernumeraryAdmin(UserAdmin):
     form = SupernumeraryChangeForm
 
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('fio', 'photo', 'right', 'wrong', 'about')}),
+        (None, {'fields': ('fio', 'photo', 'right', 'wrong', 'about', 'users')}),
     )
 
 
