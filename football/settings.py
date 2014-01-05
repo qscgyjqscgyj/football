@@ -117,8 +117,8 @@ djcelery.setup_loader()
 
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
-CELERY_ALWAYS_EAGER = False
-CELERY_EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+CELERY_ALWAYS_EAGER = True
+# CELERY_EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
 # A sample logging configuration. The only tangible logging

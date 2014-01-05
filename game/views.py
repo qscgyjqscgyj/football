@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import send_mass_mail
+from django.core.mail import send_mass_mail, send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
@@ -47,7 +47,7 @@ class GameDetailView(DetailView):
 
 class NewForecastView(FormView):
     template_name = 'forecast.html'
-    success_url = '/forecast/new'
+    success_url = '/accounts/profile'
     form_class = ForecastForm
 
     def get_context_data(self, **kwargs):
@@ -68,13 +68,14 @@ class NewForecastView(FormView):
                 message.supernumerary = self.request.user.supernumerary
                 message.save()
                 users = self.request.user.supernumerary.users.all()
-                emails = []
                 for user in users:
                     try:
                         user_package = UserPackage.objects.get(user=user, supernumerary=message.supernumerary,
                                                                active=True)
                         if user_package:
                             if user_package.predictions > 0:
+                                send_mail('Hi ' + user.username, "I'm The Dude! So that's what you call me.",
+                                          EMAIL_HOST_USER, [user.email], fail_silently=False)
                                 user_package.predictions = F('predictions') - 1
                                 user_package.save()
                                 forecast = Forecast.objects.get(supernumerary=message.supernumerary,
@@ -82,18 +83,16 @@ class NewForecastView(FormView):
                                                                 )
                                 UserForecast.objects.create(user=user, supernumerary=message.supernumerary,
                                                             forecast=forecast)
-                                emails.append(('Hi ' + user.username, "I'm The Dude! So that's what you call me.",
-                                               EMAIL_HOST_USER, [user.email]))
                                 # context = Context({
                                 #     'name': user.username,
                                 #     'user_forecast': user_forecast,
                                 # })
                             else:
                                 user_package.delete()
-                        send_mass_mail(emails)
-                        return HttpResponseRedirect(self.get_success_url())
+                                continue
                     except ObjectDoesNotExist:
-                        return HttpResponseRedirect(self.get_success_url())
+                        continue
+                return HttpResponseRedirect(self.get_success_url())
 
     def get_form_kwargs(self):
         kwargs = super(NewForecastView, self).get_form_kwargs()
