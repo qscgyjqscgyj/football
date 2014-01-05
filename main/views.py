@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView
 from slider.models import Slider
 from game.models import Game, Forecast
@@ -58,3 +59,19 @@ class SupernumeraryDetailView(DetailView):
         self.object.right_forecasts = len(Forecast.objects.filter(supernumerary=self.object, right=True))
         self.object.wrong_forecasts = len(Forecast.objects.filter(supernumerary=self.object, wrong=True))
         return context
+
+
+class RobokassaSuccess(TemplateView):
+    template_name = 'robokassa/success.html'
+
+
+class RobokassaFail(TemplateView):
+    template_name = 'robokassa/fail.html'
+
+
+class RobokassaError(TemplateView):
+    template_name = 'robokassa/error.html'
+
+
+def robokassa_result(request):
+    return render(request, 'robokassa/result.html')
