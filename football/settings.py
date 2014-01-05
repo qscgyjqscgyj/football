@@ -115,7 +115,7 @@ LOCAL_APPS = (
 import djcelery
 djcelery.setup_loader()
 
-# CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
 CELERY_ALWAYS_EAGER = False
 CELERY_EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
