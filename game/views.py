@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 import json
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mass_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, FormView
 from robokassa.forms import RobokassaForm
+from football.local import EMAIL_HOST_USER
 from game.forms import ForecastForm
 from game.models import *
 import datetime
 from packages.models import UserPackage, Package
 from user_profile.models import CustomUser
-from game.tasks import send_mail_about_forecast
 from django.template import Context
 from django.db.models import F
 
@@ -67,27 +68,29 @@ class NewForecastView(FormView):
                 message.supernumerary = self.request.user.supernumerary
                 message.save()
                 users = self.request.user.supernumerary.users.all()
+                emails = []
                 for user in users:
                     try:
-                        user_package = UserPackage.objects.get(user=user, supernumerary=self.request.user.supernumerary,
+                        user_package = UserPackage.objects.get(user=user, supernumerary=message.supernumerary,
                                                                active=True)
                         if user_package:
                             if user_package.predictions > 0:
                                 user_package.predictions = F('predictions') - 1
                                 user_package.save()
-                                user_forecast = UserForecast.objects.create(user=user,
-                                                                            supernumerary=self.request.user.supernumerary,
-                                                                            forecast=Forecast.objects.get(supernumerary=self.request.user.supernumerary,
-                                                                                                          game=Game.objects.get(pk=int(self.request.POST['game']))
-                                                                            ,))
-                                user_forecast.save()
-                                context = Context({
-                                    'name': user.username,
-                                    'user_forecast': user_forecast,
-                                })
-                                send_mail_about_forecast.apply_async((context, user.email), retry=True)
+                                forecast = Forecast.objects.get(supernumerary=message.supernumerary,
+                                                                game=Game.objects.get(pk=int(self.request.POST['game']))
+                                                                )
+                                UserForecast.objects.create(user=user, supernumerary=message.supernumerary,
+                                                            forecast=forecast)
+                                emails.append(('Hi ' + user.username, "I'm The Dude! So that's what you call me.",
+                                               EMAIL_HOST_USER, [user.email]))
+                                # context = Context({
+                                #     'name': user.username,
+                                #     'user_forecast': user_forecast,
+                                # })
                             else:
                                 user_package.delete()
+                        send_mass_mail(emails)
                         return HttpResponseRedirect(self.get_success_url())
                     except ObjectDoesNotExist:
                         return HttpResponseRedirect(self.get_success_url())
@@ -101,7 +104,7 @@ class NewForecastView(FormView):
             forecasts = Forecast.objects.filter(supernumerary=supernumerary)
             for game in all_games:
                 for forecast in forecasts:
-                    if game == forecast.game:
+                    if game == forecast.game and game.date < datetime.datetime.now():
                         games.append(game.pk)
             self.form_class.base_fields['game'].queryset = Game.objects.exclude(id__in=games)
             return kwargs

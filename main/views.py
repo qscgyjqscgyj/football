@@ -7,20 +7,6 @@ from game.models import Game, Forecast
 from user_profile.models import Supernumerary
 
 
-class Foo(object):
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return '%s' % self.name
-
-    def __unicode__(self):
-        return '%s' % self.name.decode('utf-8')
-
-    def __repr__(self):
-        return '%s' % self.name
-
-
 class MainView(TemplateView):
     template_name = 'base.html'
 

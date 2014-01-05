@@ -116,15 +116,11 @@ import djcelery
 djcelery.setup_loader()
 
 # CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
-# CELERY_ALWAYS_EAGER = False
-# BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
-CELERY_ALWAYS_EAGER = True
+BROKER_BACKEND = "djkombu.transport.DatabaseTransport"
+CELERY_ALWAYS_EAGER = False
 CELERY_EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
-CELERY_EMAIL_TASK_CONFIG = {
-    'queue': 'django_email',
-    'delivery_mode': 1,
-}
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
